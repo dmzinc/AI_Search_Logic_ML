@@ -1,6 +1,6 @@
-<<<<<<< HEAD
+
 # AI_Search_Logic_ML
-=======
+
 # Applied AI Assignment
 
 [![forthebadge](http://forthebadge.com/images/badges/made-with-python.svg)](http://forthebadge.com)
