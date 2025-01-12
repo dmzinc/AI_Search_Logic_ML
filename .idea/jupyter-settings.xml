@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JupyterPersistentConnectionParameters">
+    <option name="knownRemoteServers">
+      <list>
+        <JupyterConnectionParameters>
+          <option name="authType" value="notebook" />
+          <option name="token" value="93c51e4d92c52157449bee2083e2cd9e8e22faa209c77980" />
+          <option name="urlString" value="http://localhost:8888/" />
+          <authParams2>
+            <map>
+              <entry key="token" value="93c51e4d92c52157449bee2083e2cd9e8e22faa209c77980" />
+            </map>
+          </authParams2>
+        </JupyterConnectionParameters>
+        <JupyterConnectionParameters>
+          <option name="authType" value="notebook" />
+          <option name="token" value="42286d885e8f631ec42ee86dacd13cd00dd88e9ebd98a1f6" />
+          <option name="urlString" value="http://localhost:8889/" />
+          <authParams2>
+            <map>
+              <entry key="token" value="42286d885e8f631ec42ee86dacd13cd00dd88e9ebd98a1f6" />
+            </map>
+          </authParams2>
+        </JupyterConnectionParameters>
+        <JupyterConnectionParameters>
+          <option name="authType" value="notebook" />
+          <option name="token" value="b5159f050bfe144c7d5eed266266945859086f5c60859cb7" />
+          <option name="urlString" value="http://localhost:8890/" />
+          <authParams2>
+            <map>
+              <entry key="token" value="b5159f050bfe144c7d5eed266266945859086f5c60859cb7" />
+            </map>
+          </authParams2>
+        </JupyterConnectionParameters>
+      </list>
+    </option>
+    <option name="moduleParameters">
+      <map>
+        <entry key="$PROJECT_DIR$/.idea/eos_assignment.iml">
+          <value>
+            <JupyterConnectionParameters>
+              <option name="authType" value="notebook" />
+              <option name="token" value="b5159f050bfe144c7d5eed266266945859086f5c60859cb7" />
+              <option name="urlString" value="http://localhost:8890/" />
+              <authParams2>
+                <map>
+                  <entry key="token" value="b5159f050bfe144c7d5eed266266945859086f5c60859cb7" />
+                </map>
+              </authParams2>
+            </JupyterConnectionParameters>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
