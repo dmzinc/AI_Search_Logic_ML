@@ -16,10 +16,6 @@ This project explores three core areas in Artificial Intelligence:
 ## Table of Contents
 - [Requirements](#requirements)
 - [Usage](#usage)
-- [How to Run the Code](#how-to-run-the-code)
-- [Contributing](#contributing)
-- [License](#license)
-
 ---
 
 ## Requirements
@@ -49,4 +45,3 @@ The required dependencies are listed in the `env.yaml` file. Use this file to cr
     - Train and evaluate machine learning models. 
     - Solve search problems with BFS, DFS, and A*. 
     - Analyze logic programming solutions.
->>>>>>> e386069 (ML Algorithms)
