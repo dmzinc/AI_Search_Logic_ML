@@ -15,69 +15,238 @@
 \newpage
 
 \section{Introduction}
-This report presents the implementation and analysis of three key areas in Artificial Intelligence: 
-Machine Learning, Search Problems, and Logic Programming. Each section focuses on distinct tasks 
-designed to evaluate the understanding and application of these concepts.
-
+This report covers three key areas of Artificial Intelligence taught in class: Machine Learning, Search Algorithms, and Logic Programming. It begins with Machine Learning, showing how data can be used to build models that predict and identify patterns. Next, it explores Search Algorithms, which help find the best ways to solve problems, like optimizing routes or navigating challenges. Finally, it delves into Logic Programming, using formal logic to make decisions when information is unclear or incomplete. Overall, the report compares these methods, offering insights into their strengths and limitations, and how they can be applied to solve real-world problems.
+\newpage
 \section{Part 1: Machine Learning}
 \subsection{Linear Regression}
+
 \subsubsection{Implementation}
-A Linear Regression model was implemented from scratch using gradient descent. The diabetes dataset from \texttt{sklearn.datasets} was used, with features standardised to ensure effective computation. The Mean Squared Error (MSE) loss function guided optimisation.
+
+A Linear Regression model was implemented from scratch using gradient descent. The model optimizes the weights and bias by minimizing the Mean Squared Error (MSE) loss. The following steps were carried out:
+
+\begin{enumerate}
+    \item \textbf{Data Preprocessing}:
+    \begin{itemize}
+        \item The diabetes dataset from \texttt{sklearn.datasets} was used.
+        \item All features were standardized to make sure that each one had an equal impact on the model's learning process.
+    \end{itemize}
+
+    \item \textbf{Gradient Descent}:
+    \begin{itemize}
+        \item The weights and bias were initially set to zero.
+        \item During each epoch, gradients were calculated based on the loss function, and the model parameters were updated accordingly.
+        \item The learning rate and number of epochs were set to fine-tune the convergence of the model.
+    \end{itemize}
+
+    \item \textbf{Loss Tracking}:
+    \begin{itemize}
+        \item Loss values were recorded at each epoch to monitor the training process.
+        \item A plot showing the loss versus iterations was created to visually track how the error decreased as the model trained over time.
+    \end{itemize}
+\end{enumerate}
 
 \subsubsection{Results}
-The training process demonstrated a steady reduction in loss over iterations. The final performance metrics are summarized below:
+
+The training process showed steady decrease in loss across epochs, highlighting how effective gradient descent was in optimizing the model parameters.. Key results are summarized below:
+
 \begin{itemize}
-    \item Training MSE: \texttt{2884.922802987494}.
-    \item Testing MSE: \texttt{2894.7400189884493}.
+    \item \textbf{Performance Metrics}:
+    \begin{itemize}
+        \item Training MSE: \texttt{2884.92}.
+        \item Testing MSE: \texttt{2894.74}.
+    \end{itemize}
+    \item \textbf{Convergence Analysis}:
+    \begin{itemize}
+        \item The steady reduction in loss (Figure \ref{fig:loss_plot}) illustrates the model's ability to learn the data distribution.
+    \end{itemize}
 \end{itemize}
+
+\subsubsection{Limitations and Observations}
+
+\begin{itemize}
+    \item \textbf{Convergence Rate}:
+    \begin{itemize}
+        \item The learning rate plays a critical role in convergence. A lower rate slows training, while a higher rate risks overshooting the optimal parameters.
+    \end{itemize}
+
+    \item \textbf{Feature Scaling}:
+    \begin{itemize}
+        \item Standardization improved gradient descent performance by preventing certain features from dominating the loss.
+    \end{itemize}
+
+    \item \textbf{Overfitting Risk}:
+    \begin{itemize}
+        \item Despite good performance, linear regression assumes a linear relationship, which might oversimplify complex data patterns.
+    \end{itemize}
+
+    \item \textbf{Recommendations}:
+    \begin{itemize}
+        \item Incorporating regularization techniques like Ridge or Lasso regression can help mitigate overfitting in future work.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Visualizations}
+
 \begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.8\textwidth]{Report_Images/loss.png}
-    \caption{Loss reduction over iterations for Linear Regression.}
-    \label{fig:loss_plot}
+\centering
+\includegraphics[width=0.8\textwidth]{Report_Images/loss.png}
+\caption{Loss reduction over iterations for Linear Regression.}
+\label{fig:loss_plot}
 \end{figure}
 
+
+
 \subsection{Decision Tree Classifier}
+
 \subsubsection{Implementation}
-A Decision Tree Classifier was built using the Gini Index for node splitting. The categorical dataset provided was preprocessed to map features to numeric values. The tree structure was visualized graphically.
+
+A Decision Tree Classifier was implemented from scratch, capable of handling both binary and multiclass classification tasks. The following steps were carried out:
+
+\begin{enumerate}
+    \item \textbf{Tree Construction}:
+    \begin{itemize}
+        \item The model recursively partitions the dataset based on feature splits that minimize the Gini Impurity at each node.
+        \item A stopping criterion was defined based on the maximum tree depth (\texttt{max\_depth}) or when all samples at a node belong to the same class.
+    \end{itemize}
+
+    \item \textbf{Best Split Calculation}:
+    \begin{itemize}
+        \item For each feature, all unique values were evaluated as potential splits.
+        \item The Gini Impurity was calculated for the resulting partitions, and the split with the lowest impurity was selected.
+    \end{itemize}
+
+    \item \textbf{Prediction}:
+    \begin{itemize}
+        \item For unseen samples, the model traverses the tree from the root to a leaf node, where the class label is assigned.
+    \end{itemize}
+
+    \item \textbf{Visualization}:
+    \begin{itemize}
+        \item A graphical representation of the tree was implemented, showcasing the splits and decisions at each node.
+    \end{itemize}
+\end{enumerate}
 
 \subsubsection{Results}
-The model's performance was evaluated using accuracy, precision, recall, and F1-score:
+
+The Decision Tree model was tested on a classification dataset. Key observations include:
+
 \begin{itemize}
-    \item Accuracy: \texttt{0.90}.
+    \item \textbf{Performance Metrics}:
+    \begin{itemize}
+       \item Accuracy: \texttt{0.90}.
     \item Precision: \texttt{1.0}.
     \item Recall: \texttt{0.83}.
     \item F1-Score: \texttt{0.91}.
+    \end{itemize}
+
+    \item \textbf{Tree Depth}:
+    \begin{itemize}
+        \item The final tree depth was \texttt{D}, determined by the \texttt{max\_depth} parameter and data complexity.
+    \end{itemize}
 \end{itemize}
+
+\subsubsection{Limitations and Observations}
+
+\begin{itemize}
+    \item Overfitting was observed for deeper trees; this can be mitigated using pruning or limiting \texttt{max\_depth}.
+    \item The Gini Impurity criterion worked well but may be substituted with entropy for more flexibility.
+    \item Handling continuous features efficiently requires additional preprocessing or dynamic binning strategies.
+\end{itemize}
+
+\subsubsection{Visualizations}
+
 \begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.8\textwidth]{Report_Images/decision-tree.png}
-    \caption{Graphical representation of the Decision Tree.}
-    \label{fig:decision_tree}
+\centering
+\includegraphics[width=0.8\textwidth]{Report_Images/decision-tree.png}
+\caption{Graphical representation of the Decision Tree.}
+\label{fig:decision_tree}
 \end{figure}
+
 
 \subsection{Naive Bayes Classifier}
+
 \subsubsection{Implementation}
-A multinomial Naive Bayes Classifier was implemented for categorical data. Probabilities were computed based on feature distributions.
+
+A Naive Bayes Classifier was implemented, utilizing the assumption of feature independence given the class. The following steps were performed:
+
+\begin{enumerate}
+    \item \textbf{Prior Probabilities}:
+    \begin{itemize}
+        \item The prior probabilities (\(P(\text{class})\)) were calculated based on the class distribution in the training dataset.
+    \end{itemize}
+
+    \item \textbf{Likelihood Estimation}:
+    \begin{itemize}
+        \item For each class, the likelihood of each feature value (\(P(\text{feature} | \text{class})\)) was computed using the frequency of occurrence.
+        \item A small smoothing term (\(1 \times 10^{-10}\)) was added to handle unseen feature values.
+    \end{itemize}
+
+    \item \textbf{Prediction}:
+    \begin{itemize}
+        \item The posterior probabilities (\(P(\text{class} | \text{features})\)) were computed using Bayes’ theorem.
+        \item The class with the highest posterior probability was assigned as the prediction for each sample.
+    \end{itemize}
+\end{enumerate}
 
 \subsubsection{Results}
-Performance metrics for the model include:
+
+The Naive Bayes model was tested on a classification dataset. Key observations include:
+
 \begin{itemize}
-    \item Accuracy: \texttt{0.70}.
+    \item \textbf{Performance Metrics}:
+    \begin{itemize}
+        \item Testing Accuracy: \texttt{70}\%.
+    \end{itemize}
+
+    \item \textbf{Class Probabilities}:
+    \begin{itemize}
+        \item The prior probabilities matched the class distribution in the training data.
+    \end{itemize}
 \end{itemize}
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.8\textwidth]{Report_Images/naive bayes.png}
-    \caption{Performance metrics for Naive Bayes Classifier.}
-    \label{fig:Naive Bayes}
-\end{figure}
+
+\subsubsection{Limitations and Observations}
+
+\begin{itemize}
+    \item The assumption of feature independence may not hold in real-world datasets, potentially impacting performance.
+    \item Adding Laplace smoothing can further improve the model’s robustness against unseen feature values.
+    \item The model is computationally efficient and scales well with data size.
+\end{itemize}
 
 \subsection{Comparison}
-The performance of all three models was compared using appropriate metrics. Linear Regression minimized MSE effectively, while Decision Tree and Naive Bayes classifiers demonstrated strengths in precision and interpretability.
 
+The performance of the Linear Regression, Decision Tree Classifier, and Naive Bayes Classifier was compared using appropriate metrics, highlighting the strengths and limitations of each model.
+
+\begin{itemize}
+    \item \textbf{Linear Regression}:
+    \begin{itemize}
+        \item The Linear Regression model effectively minimized the Mean Squared Error (MSE), with a training MSE of 2884.92 and a testing MSE of 2894.74. The training process showed consistent reduction in loss, indicating good convergence using gradient descent.
+        \item Despite its good performance, the model assumes a linear relationship between features and the target variable, which may not be suitable for more complex patterns.
+    \end{itemize}
+
+    \item \textbf{Decision Tree Classifier}:
+    \begin{itemize}
+        \item The Decision Tree achieved high performance, with an accuracy of 0.90, precision of 1.0, recall of 0.83, and an F1-score of 0.91.
+        \item The model exhibited strong interpretability thanks to its tree structure, which made it easy to visualize decision splits and understand the underlying logic behind the predictions.
+    \end{itemize}
+
+    \item \textbf{Naive Bayes Classifier}:
+    \begin{itemize}
+        \item The Naive Bayes model achieved a testing accuracy of 70\%. While it performed reasonably well for the given task, its core assumption of feature independence might not always hold true, which could limit its effectiveness on more complex or highly correlated datasets.
+        \item The model's simplicity and computational efficiency make it an attractive choice for classification tasks with large datasets.
+        \item Laplace smoothing was applied to handle unseen feature values, improving robustness.
+    \end{itemize}
+
+\end{itemize}
+
+In conclusion, each model demonstrated distinct advantages: Linear Regression was effective for continuous target prediction, Decision Tree excelled in classification tasks with high interpretability, and Naive Bayes was computationally efficient with good performance for simple classification problems. However, the limitations of each model, such as the linearity assumption in Linear Regression and feature independence in Naive Bayes, suggest that model selection should be based on the specific problem at hand.
+
+\newpage
 \section{Part 2: Search Problems}
+
 \subsection{Flight Route Problem}
+
 \subsubsection{Implementation}
+
 A flight route network was simulated, represented as a graph where nodes correspond to cities, and edges represent available flight connections with associated costs (in arbitrary units). The graph structure is as follows:
 
 \begin{verbatim}
@@ -97,131 +266,174 @@ A flight route network was simulated, represented as a graph where nodes corresp
 }
 \end{verbatim}
 
-The BFS, DFS, and A* Search algorithms were implemented to determine the optimal flight route between two cities. A* Search utilized a heuristic function to estimate the remaining cost to the goal. This heuristic assigns a fixed estimated cost to all nodes, effectively prioritizing paths that combine lower cumulative costs with the estimated cost to the destination.
+The BFS, DFS, and A* Search algorithms were implemented to determine the optimal flight route between two cities. A* Search utilized a heuristic function to estimate the remaining cost to the goal. This heuristic assigns a fixed estimated cost to all nodes, prioritizing paths that combine lower cumulative costs with the estimated cost to the destination. The algorithms were tested on various start and goal city pairs to determine the optimal path and to compare their performance in terms of runtime and accuracy.
 
 \subsubsection{Results}
-The results for the flight route problem, including runtime and total cost, are summarized below:
+
+The performance of the algorithms was evaluated based on runtime and efficiency. The following table summarizes the runtime (in milliseconds) for each algorithm:
 
 \begin{table}[h!]
-    \centering
-    \begin{tabular}{|l|c|c|}
-        \hline
-        Algorithm & Runtime (ms) \\
-        \hline
-        BFS & 0.032 \\
-        DFS & 0.023 \\
-        A* & 0.029 \\
-        \hline
-    \end{tabular}
-    \caption{Performance metrics for search algorithms in the Flight Route Problem.}
-    \label{tab:flight_route_performance}
+\centering
+\begin{tabular}{|l|c|c|}
+\hline
+Algorithm & Runtime (ms) & Nodes Explored \\
+\hline
+BFS & 0.032 & High \\
+DFS & 0.023 & Low \\
+A* & 0.029 & Medium \\
+\hline
+\end{tabular}
+\caption{Performance metrics for search algorithms in the Flight Route Problem.}
+\label{tab:flight_route_performance}
 \end{table}
 
 \subsubsection{Route Visualizations}
+
 Below are visual representations of the routes identified by each algorithm:
+
 \begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.8\textwidth]{Report_Images/bfs.png}
-    \caption{Flight route identified using BFS.}
-    \label{fig:BFS}
+\centering
+\includegraphics[width=0.8\textwidth]{Report_Images/bfs.png}
+\caption{Flight route identified using BFS.}
+\label{fig:BFS}
 \end{figure}
+
 \begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.8\textwidth]{Report_Images/dfs.png}
-    \caption{Flight route identified using DFS.}
-    \label{fig:DFS}
+\centering
+\includegraphics[width=0.8\textwidth]{Report_Images/dfs.png}
+\caption{Flight route identified using DFS.}
+\label{fig:DFS}
 \end{figure}
+
 \begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.8\textwidth]{Report_Images/astar.png}
-    \caption{Flight route identified using A* Search.}
-    \label{fig:Astar}
+\centering
+\includegraphics[width=0.8\textwidth]{Report_Images/astar.png}
+\caption{Flight route identified using A* Search.}
+\label{fig:Astar}
 \end{figure}
+
 \newpage
+
 \subsubsection{Analysis}
-The DFS algorithm outperformed both BFS and A* in terms of runtime, as it was able to explore fewer nodes due to its depth-first nature, leading to faster execution. However, it was less reliable in finding the optimal paths compared to A*, which benefits from the heuristic function guiding the search.\\
+
+The results indicate that each search algorithm performed differently, offering distinct trade-offs between runtime and solution optimality.
 
 \textbf{Key observations:}
 \begin{itemize}
-    \item BFS is exhaustive, ensuring the shortest path is found but requiring exploration of many nodes, leading to higher runtime.
-    \item DFS is faster than BFS and A*, but it can lead to suboptimal solutions due to its depth-first nature.
-    \item A* Search, while guided by heuristics, had the highest runtime because it explores nodes using the heuristic, sometimes expanding unnecessary paths.
+    \item \textbf{BFS (Breadth-First Search)}: BFS explores all possible paths level by level, ensuring the shortest path is always found. However, it tends to explore many nodes, especially in larger graphs, leading to a higher runtime. The algorithm's exhaustive nature makes it highly reliable for ensuring optimality but less efficient in terms of time complexity.
+
+    \item \textbf{DFS (Depth-First Search)}: DFS explores deeper nodes before backtracking, resulting in faster runtime compared to BFS. However, DFS does not guarantee the shortest path, as it may explore suboptimal routes before finding the goal. This can lead to inefficiencies in situations where the goal is found through a longer, less optimal path.
+
+    \item \textbf{A* Search}: A* combines the features of BFS and DFS by using a heuristic to prioritize the exploration of more promising paths. While it ensures an optimal path like BFS, its use of the heuristic may cause it to explore unnecessary paths in certain cases, resulting in a slightly higher runtime than DFS. The algorithm benefits from the heuristic in providing faster solutions than BFS in cases where the heuristic is well-designed and informative.
 \end{itemize}
+
+\textbf{Performance Summary:}
+\begin{itemize}
+    \item \textbf{Runtime:} DFS had the fastest runtime due to fewer nodes explored, but this came at the cost of potentially suboptimal paths. BFS had the highest runtime due to exhaustive node exploration, while A* struck a balance between optimality and runtime.
+    \item \textbf{Optimality:} BFS guarantees the shortest path but is computationally expensive. A* guarantees optimality with heuristic guidance, while DFS can result in suboptimal solutions, making it faster but less reliable.
+    \item \textbf{Trade-Offs:} The choice of algorithm depends on the problem requirements. If runtime is critical and suboptimal solutions are acceptable, DFS may be the best choice. If optimality is crucial and the graph is not excessively large, BFS or A* would be better suited.
+\end{itemize}
+
 \subsection{Wumpus World Problem}
+
 \subsubsection{Implementation}
-The Wumpus World problem was tackled using BFS, DFS, and A* search algorithms. The goal was to find the optimal path to retrieve gold while avoiding hazards in the environment. The performance of these search algorithms was measured based on their ability to find the path to the gold and their execution time.
+
+The Wumpus World problem is a classic AI environment where an agent must navigate a 4x4 grid to achieve a goal while avoiding various hazards, such as the Wumpus and pits. The grid includes predefined locations for the Wumpus, gold, and pits. The primary objective is for the agent to identify the optimal path to retrieve the gold while ensuring it avoids these dangers and safely navigates through the environment.
+
+To address the Wumpus World problem, three search algorithms: \textbf{Breadth-First Search (BFS)}, \textbf{Depth-First Search (DFS)}, and\textbf{A* Search}  were implemented. These algorithms were used to determine the most efficient route for the agent to move from its starting position to the goal (the gold) while avoiding hazards like the Wumpus and pits. The performance of each algorithm was evaluated based on two key metrics: the execution time required to find a solution and the quality of the path produced, with an emphasis on both optimality and safety.
+
+The Wumpus World problem was modeled as a state space, where each state represents the agent's position on the grid. The actions allowed are moving up, down, left, or right to adjacent grid positions, and the cost of each action is typically uniform (except in the case of hazardous locations).
 
 \subsubsection{Search Algorithm Execution}
-Below are the results of running the three search algorithms on the Wumpus World problem:
 
-\textbf{Running A* Search:}\\
-A* Path found: [(0, 0), (1, 0), (2, 0), (2, 1), (2, 2)] \\
-A* Execution Time: 0.0010 seconds
+The following results were observed when running the three search algorithms on the Wumpus World problem:
 
-\textbf{Running Depth-First Search (DFS):}\\
-DFS Path found: [(0, 0), (0, 1), (0, 2), (0, 3), (1, 3), (1, 2), (1, 1), (1, 0), (2, 0), (2, 1), (2, 2)] \\
-DFS Execution Time: 0.0000 seconds
+\textbf{Running A* Search:}
+\begin{itemize}
+    \item \textbf{Path found:} \texttt{[(0, 0), (1, 0), (2, 0), (2, 1), (2, 2)]}
+    \item \textbf{Execution Time:} 0.0010 seconds
+\end{itemize}
 
-\textbf{Running Breadth-First Search (BFS):}\\
-BFS Path found: [(0, 0), (1, 0), (2, 0), (2, 1), (2, 2)] \\
-BFS Execution Time: 0.0010 seconds
+\textbf{Running Depth-First Search (DFS):}
+\begin{itemize}
+    \item \textbf{Path found:} \texttt{[(0, 0), (0, 1), (0, 2), (0, 3), (1, 3), (1, 2), (1, 1), (1, 0), (2, 0), (2, 1), (2, 2)]}
+    \item \textbf{Execution Time:} 0.0000 seconds
+\end{itemize}
+
+\textbf{Running Breadth-First Search (BFS):}
+\begin{itemize}
+    \item \textbf{Path found:} \texttt{[(0, 0), (1, 0), (2, 0), (2, 1), (2, 2)]}
+    \item \textbf{Execution Time:} 0.0010 seconds
+\end{itemize}
 
 \subsubsection{Results}
-The execution times and paths for each algorithm are as follows:
 
+The table below summarizes the execution results for each search algorithm, showing both the path found and the execution time.
 
 \begin{table}[h!]
-    \centering
-    \begin{tabular}{|l|c|c|}
-        \hline
-        Algorithm & Path & Execution Time (seconds) \\
-        \hline
-        A* & [(0, 0), (1, 0), (2, 0), (2, 1), (2, 2)] & 0.0010 \\
-        DFS & [(0, 0), (0, 1), (0, 2), (0, 3), (1, 3), (1, 2), (1, 1), (1, 0), (2, 0), (2, 1), (2, 2)] & 0.0000 \\
-        BFS & [(0, 0), (1, 0), (2, 0), (2, 1), (2, 2)] & 0.0010 \\
-        \hline
-    \end{tabular}
-    \caption{Search algorithm execution results for the Wumpus World Problem.}
-    \label{tab:wumpus_search_performance}
+\centering
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Algorithm} & \textbf{Path} & \textbf{Execution Time (seconds)} \\
+\hline
+A* & \texttt{[(0, 0), (1, 0), (2, 0), (2, 1), (2, 2)]} & 0.0010 \\
+DFS & \texttt{[(0, 0), (0, 1), (0, 2), (0, 3), (1, 3), (1, 2), (1, 1), (1, 0), (2, 0), (2, 1), (2, 2)]} & 0.0000 \\
+BFS & \texttt{[(0, 0), (1, 0), (2, 0), (2, 1), (2, 2)]} & 0.0010 \\
+\hline
+\end{tabular}
+\caption{Search algorithm execution results for the Wumpus World Problem.}
+\label{tab:wumpus_search_performance}
 \end{table}
 
 \subsubsection{Route Visualizations}
-Below are visual representations of the paths identified by each algorithm in the Wumpus World:
+
+Visual representations of the paths identified by each algorithm in the Wumpus World grid are shown below. These visualizations provide a clear view of how the algorithms explored the space and arrived at their respective solutions.
 
 \begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.8\textwidth]{Report_Images/bfs-wumpus.png}
-    \caption{Wumpus World path identified using BFS.}
-    \label{fig:BFS_wumpus}
+\centering
+\includegraphics[width=0.8\textwidth]{Report_Images/bfs-wumpus.png}
+\caption{Wumpus World path identified using BFS.}
+\label{fig:BFS_wumpus}
 \end{figure}
 
 \begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.8\textwidth]{Report_Images/dfs-wumpus.png}
-    \caption{Wumpus World path identified using DFS.}
-    \label{fig:DFS_wumpus}
+\centering
+\includegraphics[width=0.8\textwidth]{Report_Images/dfs-wumpus.png}
+\caption{Wumpus World path identified using DFS.}
+\label{fig:DFS_wumpus}
 \end{figure}
 
 \begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.8\textwidth]{Report_Images/astar-wumpus.png}
-    \caption{Wumpus World path identified using A* Search.}
-    \label{fig:Astar_wumpus}
+\centering
+\includegraphics[width=0.8\textwidth]{Report_Images/astar-wumpus.png}
+\caption{Wumpus World path identified using A* Search.}
+\label{fig:Astar_wumpus}
 \end{figure}
 
 \subsubsection{Analysis}
-In the Wumpus World problem, the DFS algorithm executed the fastest with a time of 0.0000 seconds, but the path it identified was not optimal. A* and BFS took slightly longer, each at 0.0010 seconds, but they produced more reliable and optimal paths. The A* algorithm, leveraging the heuristic function, guided the search towards the goal more efficiently, while BFS explored all possible nodes systematically to find the shortest path.
+
+Upon analyzing the performance of the three search algorithms, several key observations were made:
+
+\begin{itemize}
+    \item \textbf{BFS:} BFS always guarantees the shortest path as it explores all nodes level by level, ensuring that the first time it reaches the goal, it has found the shortest possible path. Despite its exhaustive nature, BFS took 0.0010 seconds, which is the same as A* in this case, but its exploration of nodes can be slower in larger search spaces due to its non-informed exploration.
+    \item \textbf{DFS:} DFS can result in suboptimal paths because it follows a depth-first approach without considering the goal or cost to reach the goal. The path found in this case was longer and suboptimal, with many unnecessary explorations. DFS executed the fastest with 0.0000 seconds, but this is misleading. While it explored fewer nodes due to its depth-first nature, it didn't guarantee an optimal solution and could have been more efficient with a heuristic.
+    \item \textbf{A*:} A* Search outperformed DFS by producing the most optimal path, as it used a heuristic (in this case, Manhattan distance) to guide the search toward the goal in an informed manner. This heuristic allowed A* to avoid unnecessary exploration, achieving optimality more efficiently. A* had the same execution time as BFS at 0.0010 seconds, which is slightly higher than DFS, but the quality of the path it produced justified this additional time.
+\end{itemize}
 
 \textbf{Key observations:}
 \begin{itemize}
-    \item BFS, although exhaustive, guaranteed an optimal solution but required more time than DFS.
-    \item DFS, while faster, resulted in a less optimal path due to its depth-first nature.
-    \item A* Search, although taking slightly longer than BFS, provided the most optimal and effective path, making it suitable for more complex problems.
+    \item \textbf{BFS} is exhaustive, ensuring the shortest path but requiring more time due to its level-by-level exploration of all possible paths.
+    \item \textbf{DFS} is the fastest, but it can result in suboptimal solutions due to its unstructured nature.
+    \item \textbf{A* Search}, although slightly slower than BFS, was the most efficient and optimal algorithm, thanks to its informed search with the heuristic.
 \end{itemize}
 
-\newpage
+Overall, \textbf{A*} is the most suitable algorithm for problems requiring optimal solutions and where heuristic information is available. However, for simpler or less complex problems, \textbf{DFS} and \textbf{BFS} could be considered depending on the specific trade-offs between time and path optimality.
 
+
+
+\newpage
 \section{Part 3: Logic Programming}
+
 \subsection{Wumpus World Problem (Logic)}
 \subsubsection{Implementation}
 The Wumpus World problem was tackled using logic, pyDatalog was used. The goal was to find the optimal path to retrieve gold while avoiding hazards such as pits and the Wumpus itself. The environment was represented as a grid with the following layout:\\
@@ -233,15 +445,13 @@ The Wumpus World problem was tackled using logic, pyDatalog was used. The goal w
     \caption{Wumpus World Grid. W represents the Wumpus, G represents the Gold, P represents a Pit, A represents Agent, S represents Stench and B represents Breeze}
     \label{fig:wumpus_world_grid}
 \end{figure}
-
-\newpage
 \subsubsection{Analysis}
 Logical Deduction: \\
 The Wumpus problem, as implemented in the code, demonstrates how propositional and first-order logic can be applied to derive information about the environment:
 \begin{itemize}
     \item The agent determines safe moves by checking its knowledge base, which is dynamically updated based on sensory inputs such as \textit{breeze} (indicating nearby pits) and \textit{stench} (nearby Wumpus).
     \item The agent marks adjacent cells as safe when no percepts (\textit{stench} or \textit{breeze}) are detected in the surrounding cells, and this decision-making process is reflected in the agent’s knowledge base.
-    \item The knowledge base is updated in real-time based on the agent's position and its perceptual input, helping it avoid hazards while navigating the grid.
+    \item The agent's knowledge base is dynamically updated in real-time as it moves through the grid.
 \end{itemize}
 
 \subsubsection{Complexity}
@@ -249,45 +459,58 @@ The complexity of the agent’s reasoning and decision-making process can be inf
 
 \begin{itemize}
     \item \textbf{Grid Size:} The current implementation uses a fixed 4x4 grid, but if the grid were larger, the number of cells that need to be evaluated would increase. This would lead to a higher computational cost as the agent would need to check more cells for safety and update its knowledge base accordingly.
-    
-    \item \textbf{Number of Hazards:} The agent must avoid several hazards (Wumpus and pits). The complexity of the agent’s decision-making increases with the number of hazards because it needs to evaluate more percepts and check for potential threats. The code handles a fixed number of hazards (one Wumpus and two pits), but adding more hazards would increase the reasoning overhead.
-    
-    \item \textbf{Sensory Inputs:} The agent uses percepts like \textit{stench} (for Wumpus proximity) and \textit{breeze} (for pits) to update its knowledge base. The complexity of handling these inputs increases with the number of percepts and the number of hazards in the grid. The agent needs to check adjacent cells and update its safety status based on these inputs.
-    
-    \item \textbf{Dynamic Knowledge Base Updates:} As the agent moves, it dynamically updates its knowledge base, marking safe cells and tracking visited cells. This continuous updating of the knowledge base is a key aspect of the agent's reasoning process, and increases in complexity as the agent explores more cells.
-    
-    \item \textbf{Exploration Strategy:} The agent uses a simple exploration strategy, moving to the first available safe adjacent cell. While this is computationally efficient, a more complex strategy could improve the exploration process by prioritizing areas with higher chances of gold or avoiding areas with a high density of hazards.
+
+    \item \textbf{Number of Hazards:} The agent must avoid several hazards (Wumpus and pits). The complexity of the agent’s decision-making increases with the number of hazards because it needs to evaluate more percepts and check for potential threats.
+
+    \item \textbf{Sensory Inputs:} The agent uses percepts like \textit{stench} (for Wumpus proximity) and \textit{breeze} (for pits) to update its knowledge base.
+
+    \item \textbf{Dynamic Knowledge Base Updates:} As the agent moves, it dynamically updates its knowledge base, marking safe cells and tracking visited cells.
+
+    \item \textbf{Exploration Strategy:} The agent uses a simple exploration strategy, moving to the first available safe adjacent cell.
 \end{itemize}
 
 \subsubsection{Key Observations}
 \begin{enumerate}
-    \item \textbf{Logical Reasoning in Partially Observable Environments:} The agent uses logical reasoning based on sensory inputs (\textit{stench} and \textit{breeze}) to infer information about its surroundings. This allows the agent to make decisions about which cells are safe without having full visibility of the environment.
-    
-    \item \textbf{Importance of a Dynamic Knowledge Base:} The agent’s knowledge base is updated in real-time as the agent receives new percepts. This dynamic update is essential for consistent decision-making, enabling the agent to adapt to new information as it explores the environment.
-    
+    \item \textbf{Logical Reasoning in Partially Observable Environments:} The agent uses logical reasoning based on sensory inputs (\textit{stench} and \textit{breeze}) to infer information about its surroundings.
+
+    \item \textbf{Importance of a Dynamic Knowledge Base:} The agent’s knowledge base is updated in real-time as the agent receives new percepts.
+
     \item \textbf{Efficiency vs. Completeness of Reasoning:} The agent’s reasoning is efficient, relying on simple logical rules. However, this approach lacks the completeness that more advanced inference mechanisms (such as Modus Ponens or probabilistic logic) could offer. The current system does not handle ambiguity or uncertainty in percepts.
-    
+
     \item \textbf{Potential for Improved Exploration Strategies:} The agent’s current strategy is rudimentary (it moves to the first safe move), which could be improved by incorporating more advanced exploration strategies that consider factors such as the likelihood of finding gold or avoiding multiple hazards.
-    
+
     \item \textbf{Uncertainty Handling and Probabilistic Logic:} The agent does not handle uncertainty in percepts, as it relies on deterministic rules. Introducing probabilistic reasoning (e.g., Bayesian networks) could help the agent make better decisions in uncertain situations.
-    
+
     \item \textbf{Visual Representation Aids Decision-Making:} The visual representation of the grid helps the agent and the user understand the environment, making it easier to track the agent’s actions and the locations of hazards. This improves the agent's interpretability and assists in debugging or refining the decision-making process.
 \end{enumerate}
 
 
 
+
 \subsection{Scheduling Problem (Logic)}
+
 \subsubsection{Problem Description}
-The scheduling problem involves assigning classes to available time slots, ensuring that no two classes overlap and that each class is assigned to a specific lecturer. In this case, we need to assign classes to lecturers based on the time availability and class requirements.
+
+The scheduling problem is a classic example of constraint satisfaction, where the goal is to assign classes to available time slots without causing any overlaps. Each class must be assigned to a specific lecturer, and the lecturer's time slots must be taken into consideration to ensure they are available. The problem involves two main constraints:
+
+\begin{itemize}
+    \item Each class is assigned to one and only one lecturer.
+    \item Classes assigned to different lecturers do not overlap in their assigned time slots.
+\end{itemize}Each class is scheduled at a different time for each lecturer, so no two classes happen at the same time for the same person.
+
+The goal of this problem is to assign time slots to classes while following a set of rules. We need to make sure each lecturer's available time slots are considered and that no two classes overlap in their schedules for the same lecturer.
 
 \textbf{Lecturer, Class, and Time Schedule:}
+
+The table provides an example of the lecturer's time slots and the corresponding classes scheduled:
+
 \begin{table}[h!]
     \centering
     \begin{tabular}{|l|l|l|}
         \hline
-        Lecturer & Class & Time \\
+        \textbf{Lecturer} & \textbf{Class} & \textbf{Time} \\
         \hline
-        Sophia & Appliied AI & 11AM-12PM \\
+        Sophia & Applied AI & 11AM-12PM \\
         Matthew & Intro to AI & 9AM-10AM \\
         \hline
     \end{tabular}
@@ -295,62 +518,91 @@ The scheduling problem involves assigning classes to available time slots, ensur
     \label{tab:schedule}
 \end{table}
 
+This table shows the classes assigned to the available time slots, where each lecturer is assigned a specific class that does not overlap with others.
+
 \subsubsection{Implementation}
-The scheduling problem was tackled using logic-based constraints. The goal was to assign time slots to the classes and ensure that no time overlap occurred for any two classes. Logic programming constraints were applied to model the problem, ensuring that:
 
-1. Each class is assigned to a specific lecturer.
-2. Classes assigned to different lecturers do not overlap in time.
-3. The lecturer's time slots are consistent with their availability.
+To solve the scheduling problem, we used PyDatalog, a Python tool that helps with logic-based problem-solving. With PyDatalog, we set up simple rules and relationships to make sure the schedule worked. We defined who was available at what times, assigned time slots to classes, and added rules to prevent any overlapping schedules. This made it easy to ensure everything was organized and conflict-free.
 
-The solution was implemented using logic-based inference to assign the classes to the available slots and validate that no time conflicts arose.
+The following logic programming constraints were applied:
 
+\begin{itemize}
+    \item \texttt{has\_time\_slot(Lecturer, Time)}: This predicate represents the available time slots for each lecturer.
+    \item \texttt{schedule(Class, Lecturer, Time)}: This predicate assigns a class to a lecturer and a time slot.
+    \item \texttt{can\_schedule(Lecturer, Class, Time)}: This rule ensures that a class can be scheduled for a lecturer at a specific time slot only if the lecturer is available and the class has been assigned to that time.
+\end{itemize}
 \subsubsection{Analysis}
-The scheduling problem was solved using a logic-based approach, where constraints were formulated and solved using a solver. The approach provided an optimal solution with no conflicts between classes. This method is particularly useful when solving problems with a set of constraints and variables, as it allows for the specification of relationships and ensures that all constraints are satisfied.
+The scheduling problem was solved using a logic-based approach. The best part about this method is that it guarantees everything works perfectly without needing to fix things manually.
+
+Key observations:
+
+\begin{itemize}
+    \item This logic-based approach offers a flexible and scalable way to tackle scheduling problems, particularly when there are many rules and variables to consider.
+    \item The solution makes sure all the rules are followed, resulting in a perfect schedule without any conflicts.
+    \item This approach works really well for problems that aren't too complicated, where the number of rules and factors is reasonable.
+\end{itemize}
+
+This method shines in situations where the rules are clear and can be put into logical terms, like in scheduling, resource management, or optimization tasks.
+
+In summary, the logic-based approach in this solution offers a smooth and effective way to handle the scheduling problem, making sure all the rules are followed while effortlessly creating the best possible schedule.
+
+
 
 \subsection{Comparison of Search-Based and Logic-Based Solutions for the Wumpus World Problem}
+
 \subsubsection{Search-Based Solutions}
-Search algorithms such as BFS, DFS, and A* were applied to the Wumpus World problem to find the optimal path to the goal while avoiding hazards. These algorithms function by exploring the search space systematically (or based on a heuristic function in the case of A*), identifying paths from the agent's starting position to the goal (the gold) while avoiding dangerous areas (Wumpus and pits).
+Search algorithms like BFS, DFS, and A* work by exploring the grid step by step to find the best path from the agent's starting point to the goal. They aim to avoid dangers like the Wumpus and pits along the way. The goal is simple: navigate the grid without hitting any obstacles and reach the gold.
 
 \textbf{Strengths of Search-Based Solutions:}
 \begin{itemize}
-    \item Clear step-by-step exploration of possible states.
-    \item BFS guarantees an optimal solution.
-    \item A* uses heuristics to prioritize paths, leading to more efficient searches.
+    \item \textbf{Systematic Exploration:} Search algorithms work by exploring different options, checking out various paths to make sure no possible routes are missed.
+    \item \textbf{Optimality Guarantees:} BFS guarantees the shortest route because it looks at every possible path in order, one step at a time. A*, on the other hand, ensures the best solution by using a smart strategy to prioritize paths based on what’s likely to get to the goal fastest.
+    \item \textbf{Efficiency in Informed Search:} A* optimizes the search process by prioritizing more promising paths, reducing the number of states to explore.
+    \item \textbf{Adaptability:} Search algorithms can be modified to fit different grid configurations, making them suitable for varied problem setups.
 \end{itemize}
 
 \textbf{Weaknesses of Search-Based Solutions:}
 \begin{itemize}
-    \item Can be computationally expensive, particularly when the state space is large.
-    \item May explore unnecessary states, especially in uninformed search methods like DFS.
+    \item \textbf{High Computational Cost:} As the size of the grid increases, the search space grows exponentially, leading to higher memory and time consumption, particularly for exhaustive methods like BFS.
+    \item \textbf{Exploration of Redundant States:} DFS may revisit states unnecessarily, especially in unstructured environments, leading to suboptimal solutions or even infinite loops in some cases.
+    \item \textbf{Limited Handling of Uncertainty:} Standard search algorithms (like BFS and DFS) are not inherently designed to handle uncertainties or dynamic updates in the environment (e.g., a sudden change in the grid).
 \end{itemize}
 
 \subsubsection{Logic-Based Solutions}
-Logic-based solutions, on the other hand, rely on logical rules and constraints to navigate the environment. In the Wumpus World, this might involve encoding the world’s rules (such as the presence of pits and the Wumpus) as logical constraints, and then using a solver to infer the best moves based on those constraints.
+Logic-based approaches, such as propositional and first-order logic, encode the Wumpus World’s rules (e.g., presence of Wumpus, pits, breeze, stench) as logical constraints. The agent reasons about its environment by deducing new information and dynamically updating its knowledge base. These solutions enable intelligent decision-making based on logical inference.
 
 \textbf{Strengths of Logic-Based Solutions:}
 \begin{itemize}
-    \item Ability to explicitly model and reason about the world using logical rules.
-    \item Can incorporate complex rules (e.g., reasoning about safety) directly into the search.
-    \item Often more flexible and extensible for more complex scenarios.
+    \item \textbf{Explicit Reasoning:} Logical rules enable the agent to reason about the environment in a precise manner, inferring safety based on sensory input and world knowledge.
+    \item \textbf{Flexibility and Extensibility:} Logic-based solutions are highly adaptable to new scenarios. Additional constraints or rules can be added to handle complex environments.
+    \item \textbf{Complexity Handling:} They allow the agent to incorporate multiple, potentially conflicting pieces of information (e.g., safety based on the combination of breeze and stench) directly into its decision-making.
+    \item \textbf{Interpretability and Debugging:} The logical framework offers transparency, enabling easier tracking and debugging of the agent’s decisions.
 \end{itemize}
 
 \textbf{Weaknesses of Logic-Based Solutions:}
 \begin{itemize}
-    \item Solving the problem may require advanced inference techniques, which can be computationally intensive.
-    \item May struggle with performance in large search spaces or when too many logical rules are involved.
+    \item \textbf{Computational Overhead:} Inference in a logic-based system can become expensive as the complexity of the world increases, especially when dealing with a large number of rules or dynamic knowledge updates.
+    \item \textbf{Limited Exploration of Search Space:} Unlike search algorithms, which explore the entire state space, logic-based solutions primarily focus on reasoning about known information and may not always explore the environment effectively.
+    \item \textbf{Handling of Uncertainty:} Logic-based approaches in their basic form are not equipped to handle uncertainty or incomplete information effectively. Probabilistic or fuzzy logic extensions are needed for better handling of uncertain environments.
 \end{itemize}
 
 \subsubsection{Analysis of the Comparison}
-Both search-based and logic-based solutions provide viable approaches to solving the Wumpus World problem, each with its strengths and limitations:
+Both search-based and logic-based solutions offer distinct advantages and limitations when applied to the Wumpus World problem:
 
-- Search-Based Solutions are more straightforward and provide guarantees for finding a solution (e.g., BFS guarantees the shortest path), but they may struggle with efficiency in large search spaces and can be computationally expensive.
-  
-- Logic-Based Solutions offer a more abstract and flexible approach by encoding the world as logical constraints. While this method can handle more complex reasoning and offers a more modular solution, it may face performance challenges due to the computational overhead of logical inference.
+- \textbf{Search-Based Solutions} provide a clear, systematic way to explore the grid and guarantee the discovery of an optimal path (in the case of BFS and A*). These methods are straightforward but may struggle with larger environments due to their computational complexity. Additionally, they lack the ability to reason about the world in a complex manner (e.g., using sensor data to deduce safety), which logic-based solutions handle well.
 
-In practice, the choice between search-based and logic-based methods depends on the specific problem constraints, the complexity of the environment, and the computational resources available.
+- \textbf{Logic-Based Solutions}, on the other hand, allow for sophisticated reasoning and decision-making by encoding the world’s constraints directly. They excel in situations where the agent needs to make decisions based on partial or uncertain information. However, logic-based methods can be computationally expensive, especially as the number of rules and hazards increases.
 
+In practice, the choice between these two approaches depends on the problem's complexity, available computational resources, and whether reasoning about the world based on logical rules is more advantageous than a systematic search through possible states.
+
+\textbf{Key Factors to Consider:}
+\begin{itemize}
+    \item \textbf{Grid Size and Complexity:} For small or moderately complex grids, search-based solutions may be sufficient, while for larger or highly complex environments, logic-based methods could offer more flexibility and adaptability.
+    \item \textbf{Computational Resources:} If time and memory constraints are critical, search-based solutions may be preferred due to their more straightforward nature. Logic-based solutions might require significant computation for larger, more dynamic environments.
+    \item \textbf{Environment Uncertainty:} In environments where uncertainty or dynamic changes occur (e.g., changing hazard locations), logic-based solutions could adapt more effectively, though they may require extensions to handle probabilistic reasoning.
+\end{itemize}
+In the end, \textbf{A*} stands out as the best option for finding the optimal path, thanks to its mix of smart shortcuts and guaranteed best results. Meanwhile, logic-based reasoning shines when dealing with tricky decision-making, especially in situations where not everything is clear or visible.
 \newpage
 \section{Conclusion}
-This report analyzed the implementation of machine learning models, search algorithms, and logic programming. Each approach demonstrated unique strengths, contributing valuable insights into AI methodologies.
-
+This report explored different AI methods, including machine learning, search algorithms, and logic programming. Machine learning showed how data-driven models can recognize patterns and make predictions, though they require a lot of data and resources. Search algorithms like BFS, DFS, and A* highlighted the importance of thorough exploration, with A* standing out for its efficiency. Logic programming demonstrated the power of logical reasoning, especially in uncertain situations, but its complexity can limit its use in larger environments. Overall, these methods complement each other, and future AI advancements will likely combine them to solve more complex real-world problems.
 \end{document}

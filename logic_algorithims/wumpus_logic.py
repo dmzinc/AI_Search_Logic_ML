@@ -72,7 +72,7 @@ def display_grid():
         if agent(X, Y):
             grid[Y - 1][X - 1] = 'A'
     print("Wumpus World Grid:")
-    for row in reversed(grid):  # Reverse rows for a better visual representation
+    for row in reversed(grid):
         print(' '.join(row))
     print()
 
@@ -84,13 +84,13 @@ def update_safe_cells(X, Y):
                 pyDatalog.assert_fact('known_safe', A, B)
                 print(f"Marked ({A}, {B}) as safe.")
 
-# Simulate agent movement
+
 def simulate_agent_movement():
     print("Simulating agent movement...")
     current_position = (1, 1)
     visited_cells = set()
 
-    start_time = time.time()  # Start timing the simulation
+    start_time = time.time()
 
     while True:
         X, Y = current_position
@@ -116,7 +116,7 @@ def simulate_agent_movement():
         print(f"Safe moves: {safe_moves}")
 
         if safe_moves:
-            # Choose the next position (arbitrarily take the first safe move)
+            # Choose the next position
             next_position = safe_moves[0]
             pyDatalog.retract_fact('agent', X, Y)
             pyDatalog.assert_fact('agent', next_position[0], next_position[1])
@@ -126,6 +126,6 @@ def simulate_agent_movement():
             print("No safe moves available. Agent is stuck!")
             break
 
-    end_time = time.time()  # End timing the simulation
+    end_time = time.time()
     print(f"Simulation completed in {end_time - start_time:.4f} seconds.")
 
